@@ -1,5 +1,5 @@
 import std/os
-import std/times
+import std/times as stdTimes
 import std/strformat
 import std/strutils
 import std/random
@@ -7,6 +7,7 @@ import std/json
 
 import racco/env
 import racco/logs
+import racco/times
 import racco/builds
 import racco/previews
 
@@ -117,6 +118,9 @@ proc buildCommand (env: EnvKind = ekUser): int =
 proc previewCommand (env: EnvKind = ekUser): int =
   preview(env)
 
+proc timesCommand (content: string, env: EnvKind = ekUser): int =
+  times(content, env)
+
 when isMainModule:
   import cligen
 
@@ -126,5 +130,6 @@ when isMainModule:
     [newWeekly, cmdName = "new:weekly"],
     [newMonthly, cmdName = "new:monthly"],
     [previewCommand, cmdName = "preview"],
-    [buildCommand, cmdName = "build"]
+    [buildCommand, cmdName = "build"],
+    [timesCommand, cmdName = "times"]
   )
